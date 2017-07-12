@@ -1,0 +1,60 @@
+.lyricThumb {
+    width: 100%;
+}
+#lyricsModalBody img {
+    width: 100%;
+    height: auto;
+}
+.referentText {
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+.referentText a {
+    color: #fff;
+}
+.referentText button {
+    background-color: #fff;
+    opacity: 1;
+    cursor: pointer
+}
+#header, #authBtns, #menuBtns {
+    text-align: center;
+}
+#menuBtns button {
+    width: 90%;
+    min-height: 100px;
+    margin: 40px 0 0 0;
+    font-size: 4em;
+}
+.favorite {
+    color: red;
+}
+
+#header a {
+    text-decoration: none;
+    color: #000;
+}
+#searchInput {
+    width: 100%;
+    margin: 30px auto;
+}
+.searchWrapper {
+    width: 80%;
+    margin: 0 auto;
+}
+#lyricsSearch {
+    width: 100%;
+    display: block;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+#lyricsSearchButton {
+    margin: 10px 0;
+}
+.lyricsButton, .favoriteButton, .removeButton {
+    cursor: pointer;
+    margin: 0 5px 0 10px;
+}
