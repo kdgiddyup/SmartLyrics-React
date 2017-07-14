@@ -39,10 +39,10 @@ const ajax = {
     },
 
     // hit our api to retrieve favorites
-    favorites: (input,error,success) =>{
-        $.get(`${resource}/api/favorites/${input}`,(response) => {
-            if(!response.success || response.data.length===0) {
-                error("Sorry, there was a problem, or no results.")
+    favorites: (user,error,success) =>{
+        $.get(`${resource}/api/favorites/${user}`, (response) => {
+            if(!response.success) {
+                error(response.message)
             }
             else {
                 success(response)
@@ -80,8 +80,36 @@ const ajax = {
                 success(response.song)
             }
         })
-    }
+    },
 
+    getLyrics: ( song, error, success ) => {
+        console.log(`Fetching lyrics for #${song.song_id}`);
+
+        $.post(`${resource}/api/lyrics`, song, (response) => {
+            console.log("lyrics fetch response:",response);
+            if (response.error){
+                console.log("error getting lyrics",response.error);
+                error(response)
+            }
+            else {
+                success(response)
+            }
+        })
+        },
+
+    getAnnotations: ( note_id, error, success ) => {
+        console.log(`Fetching lyrics for #${note_id}`);
+
+        $.get(`${resource}/api/annotation/${ note_id }`, (response)=>{
+            if (response.error){
+                console.log("error getting annotations");
+                error(response)
+            }
+            else {
+                success(response)
+            }
+            }) 
+        }
 }
 
 export default ajax;

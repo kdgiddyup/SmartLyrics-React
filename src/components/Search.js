@@ -10,12 +10,26 @@ class Search extends Component {
         songs: null
         };
     }
-    handleSubmit = (event) => {
-        event.preventDefault();
-        
-        // input is an object consisting of input string and user
-        const input = {input:event.target.lyricsSearch.value.trim(),user: this.props.user};
 
+    componentDidMount() {
+        // is this a search form use (term=false) or a URL param search?
+        console.log("search term:",this.props.term);
+        if (this.props.term) {
+           this.doSearch(this.props.term.trim())     
+        }
+    }
+
+    processForm = (event) => {
+        event.preventDefault();
+        this.doSearch(event.target.lyricsSearch.value.trim())
+    }
+
+    doSearch = (searchTerm) => {
+        // input is an object consisting of input string and user
+        const input = {
+            input: searchTerm,
+            user: this.props.user
+        };
         // search requires both input and the current user
         ajax.search(input,
 
@@ -88,7 +102,7 @@ class Search extends Component {
         return (
             <div className="row">
                 <div id="searchInput" className="col-lg-12">
-                     <form onSubmit={this.handleSubmit} id="signup">
+                     <form onSubmit={this.processForm} id="signup">
                         <input className="input" id="lyricsSearch" name="lyricsSearch" placeholder="Enter lyrics, artists or song titles" type="text"/>
                      
                         <button className="btn btn-primary btn-block" id="lyricsSearchButton" type="submit">Submit</button>

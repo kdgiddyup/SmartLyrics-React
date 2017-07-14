@@ -35,7 +35,7 @@ class AuthModal extends Component {
         let thisType = "";
         if (event.target.type.value === "login") {
             thisType = "login";
-            thisMessage =  "Attempting to log you in ..."
+            thisMessage =  "Attempting to log you in"
         }
         else {
             thisType = "signup";
@@ -110,9 +110,9 @@ class AuthModal extends Component {
     }
 
     // some necessary modal methods 
-    getInitialState = () => {
-        return { showModal: false };
-    }
+    // getInitialState = () => {
+    //     return { showModal: false };
+    // }
     close = () => {
         this.setState({ 
             showModal: false,
@@ -130,7 +130,6 @@ class AuthModal extends Component {
                 formType: "login"
             },function(){
                 this.open();
-                console.log(`Form type set to ${this.state.formType}`)
             })
         }
         else {
@@ -138,7 +137,6 @@ class AuthModal extends Component {
                 formType: "signup"
             }, function(){
                 this.open();
-                console.log(`Form type set to ${this.state.formType}`)
             })
         }
     }

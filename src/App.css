@@ -28,10 +28,12 @@
     margin: 40px 0 0 0;
     font-size: 4em;
 }
+#loginBtn,#signupBtn {
+    margin: 10px 0
+}
 .favorite {
     color: red;
 }
-
 #header a {
     text-decoration: none;
     color: #000;
@@ -50,6 +52,10 @@
     height: 40px;
     border-radius: 5px;
     font-size: 1.2em;
+}
+#lyricsText a {
+    cursor: pointer;
+    text-decoration: none;
 }
 #lyricsSearchButton {
     margin: 10px 0;

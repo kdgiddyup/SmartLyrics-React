@@ -8,13 +8,18 @@ class Favorites extends Component {
     constructor() {
     super();
     this.state = {
-        songs: null
+        songs: null,
+        child: <FavoritesLoading/>
         };
+
     this.RemoveFavorite = this.RemoveFavorite.bind(this); 
     }
+    
+    
 
     componentDidMount(){   
-        // search for favorites requires current user
+        
+       // search for favorites requires current user
         ajax.favorites(this.props.user,
 
         // error function:
@@ -25,23 +30,17 @@ class Favorites extends Component {
 
         //success function:
         (response) => {
-  
             this.setState({
-                songs:response.data
+                songs:response.data,
+                child: <FavoriteResults user={this.props.user} results={response.data} GetLyrics={this.GetLyrics} RemoveFavorite={this.RemoveFavorite}/>
             });
+
+            
         })
     }
 
-    RenderResults = () => {
-        
-        console.log("attempting to render results:",this.state.songs);
-
-        return (
-        (!this.state.songs) ? <FavoritesLoading/> : <FavoriteResults results={this.state.songs} RemoveFavorite={this.RemoveFavorite}/> 
-        )
-    }
-
     RemoveFavorite = (song_id) => {
+        console.log("remove attempt song_id:",song_id);
         ajax.remove(song_id,
             // error function
             (response) => {
@@ -50,9 +49,10 @@ class Favorites extends Component {
             // success function
             (response) => {
                 // response should be a song id, which we filter from songs in state and setState with resulting array
-                response = response;                
+                //response = response;                
                 this.setState({
-                    songs: this.state.songs.filter( (song) => song.song_id != response)
+                    songs: this.state.songs.filter( (song) => song.song_id !== response),
+                    child: <FavoriteResults results={this.state.songs} RemoveFavorite={this.RemoveFavorite}/>
                 })
             })
     }
@@ -61,8 +61,7 @@ class Favorites extends Component {
         return (
             <div className="row">
                 <div className="col-lg-12" id="favoritesList">
-                    {/* render results when there are some */}
-                    {this.RenderResults()}
+                 {this.state.child}
                 </div>
             </div>
         );

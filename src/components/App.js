@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom'
-import { createHashHistory } from 'history';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import '../App.css'
 import Root from "./Root"
 import Header from "./common/Header"
@@ -57,23 +56,31 @@ class App extends Component {
   }
 
   // needed to construct these  functions to 1) pass the user into <Search> component since it's being called by <Route> and 2) conditionally render MenuBtns only if user is logged in
-  MySearch = (props) => {
+
+  Search = ({props}) => {
     return (
-      <Search user={this.state.user} {...props}/> 
+      <Search user={this.state.user} term={false} {...props}/>
     )
   }
-  MyFavorites = (props) => {
+  ParamSearch = ({match} ) => {
     return (
-      <Favorites user={this.state.user} {...props}/> 
+      <Search user={this.state.user} term={match.params.term}/>
     )
   }
-  
+
   RenderMenu = () => {
     return (
       (!this.state.user) ? null : <MenuBtns/> 
     )
   }
 
+  GetFavorites = () => {
+    return (
+      <Favorites user={this.state.user}/> 
+    )
+  }
+
+  
 
   render() {
     return (
@@ -90,8 +97,9 @@ class App extends Component {
             {this.RenderMenu()}
             
             {/* routes matching our <Links> around buttons at <MenuBtns> */}
-            <Route path="/search" render={this.MySearch}/>
-            <Route path="/favorites" render={this.MyFavorites}/>
+              <Route path="/search/:term" render={this.ParamSearch}/>
+              <Route exact path="/search" render={this.Search}/>
+              <Route path="/favorites" render={this.GetFavorites}/>
                   
         </Root>
       </Router>
