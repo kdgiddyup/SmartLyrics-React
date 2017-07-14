@@ -6,6 +6,7 @@ class SearchedSong extends Component {
  
    render() {
         const thisSong = this.props.songObj; 
+        
         // set classes for 'favorite' icon depending on status for this user
         const favClasses = `glyphicon glyphicon-heart favoriteButton ${this.props.favorite}`;
 

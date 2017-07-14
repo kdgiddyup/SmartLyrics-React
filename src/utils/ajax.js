@@ -10,6 +10,7 @@ const ajax = {
                 error(response.message)
             }
             else {
+                console.log("Sign-up successful");
                 success(response)
                 }
             })
@@ -21,18 +22,19 @@ const ajax = {
                 error(response.message)
             }
             else {
+                console.log("Login successful");
                 success(response)
                 }
             })
         },
 
     search: (input,error,success) =>{
-        console.log("Attempting search on ",input);
         $.post(`${resource}/api/search`,input,(response) => {
             if(response.length===0) {
                 error("Sorry, there was a problem, or no results.")
             }
             else {
+                console.log("Search successful");
                 success(response);
             }
         })
@@ -45,6 +47,7 @@ const ajax = {
                 error(response.message)
             }
             else {
+                console.log("Favorites fetch successful");
                 success(response)
             }
         })
@@ -60,7 +63,7 @@ const ajax = {
                 error(response.message)
             }
             else {
-                console.log(response);
+                console.log("Favoriting successful");;
                 success(response)  
             }    
         })
@@ -69,43 +72,39 @@ const ajax = {
     // hit our api to remove a favorite
     // here, we only need song_id
     remove: ( song_id, error, success ) => { 
-        console.log("attempting to remove:",song_id);
+        
         // get request sends song_id to remove route at api
         $.get(`${resource}/api/remove/${song_id}`, (response) => {
-            console.log("remove response:",response);
+          
             if (!response.success) {
                 error(response.message)
             }
             else {
+                console.log("Unfavorite successful");
                 success(response.song)
             }
         })
     },
 
     getLyrics: ( song, error, success ) => {
-        console.log(`Fetching lyrics for #${song.song_id}`);
-
         $.post(`${resource}/api/lyrics`, song, (response) => {
-            console.log("lyrics fetch response:",response);
             if (response.error){
-                console.log("error getting lyrics",response.error);
                 error(response)
             }
             else {
+                console.log("Lyrics fetch successful");
                 success(response)
             }
         })
         },
 
     getAnnotations: ( note_id, error, success ) => {
-        console.log(`Fetching lyrics for #${note_id}`);
-
         $.get(`${resource}/api/annotation/${ note_id }`, (response)=>{
             if (response.error){
-                console.log("error getting annotations");
                 error(response)
             }
             else {
+                console.log("Annotation search successful");
                 success(response)
             }
             }) 

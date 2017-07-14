@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/lib/Modal"
 import Button from "react-bootstrap/lib/Button"
 import ajax from "../../../utils/ajax"
 import SearchedSong from "../SearchedSong"
+import FavoritedSong from "../FavoritedSong"
 import LyricsBody from "./LyricsBody"
 
 class LyricsModal extends Component {
@@ -30,9 +31,7 @@ class LyricsModal extends Component {
     }  
 
     GetLyrics = ( song ) => {
-        console.log("In GetLyrics");
         this.open();
-
         ajax.getLyrics( song, 
         
             //error callback
@@ -43,10 +42,8 @@ class LyricsModal extends Component {
                 })
 
             },
-
             //success callback
             (response) => {
-                console.log("Success:",response);
                 this.setState({
                     lyrics:response.response
                 })
@@ -55,24 +52,46 @@ class LyricsModal extends Component {
     }
 
     // lot going on in renderSongs():
-    // 1. maps each song in the props.results array to the <SearchedSong> component
-    // 2. builts a songObj on the fly for each song which is passed to the GetLyrics method
-    // 4. adds favorite status and Lyrics/Annotation methods
-    renderSongs() {
-        return this.props.results.map(song => (
-            <SearchedSong key={song.song_id.toString()}
-                songObj={{
-                    "song_id":song.song_id,
-                    "title":song.title,
-                    "url":song.lyrics,
-                    "artist":song.artist,
-                    "image":song.thumb}}            
-                favorite={song.favorite}
-                GetLyrics={this.GetLyrics}
-                GetAnnotations={this.GetAnnotations}
-                SetFavorite={this.props.SetFavorite}
-            />)
-        );   
+    // 1. maps each song in the props.results array to the <LyricsModal component
+    // 2. builts a songObj on the fly for each song which will be passed to the GetLyrics method
+    // 4. adds favorite status to searched songs and Lyrics/Annotation methods
+    // 5. adds remove method to favorited songs as well as the Lyrics/Annotation methods
+
+    renderSongs(type){
+
+        if (type === "favorite") { 
+        return this.props.results.map( song => ( 
+                <FavoritedSong key={song.song_id.toString()} 
+                    songObj={{
+                        "song_id":song.song_id,
+                        "title":song.title,
+                        "url":song.lyrics,
+                        "artist":song.artist,
+                        "image":song.thumb}}  
+                    favorite={song.favorite}
+                    user={song.user}
+                    GetLyrics={this.GetLyrics}
+                    RemoveFavorite={this.props.RemoveFavorite}
+                />
+            ));
+        }
+        // if it wasn't "favorite" type, had to "search"
+        else {  
+            return this.props.results.map( song => (
+                <SearchedSong key={song.song_id.toString()}
+                    songObj={{
+                        "song_id":song.song_id,
+                        "title":song.title,
+                        "url":song.lyrics,
+                        "artist":song.artist,
+                        "image":song.thumb}}            
+                    favorite={song.favorite}
+                    GetLyrics={this.GetLyrics}
+                    GetAnnotations={this.GetAnnotations}
+                    SetFavorite={this.props.SetFavorite} 
+                />
+            ));
+        } 
     }
 
     render() {
@@ -82,8 +101,8 @@ class LyricsModal extends Component {
         return (
 
             <div>
-                <h2 className="resultsHeader">Search results</h2>
-                {this.renderSongs()}
+                {/*  search or favorite results are conditionally placed here */}
+                { this.renderSongs(this.props.type) }
 
                 {/* here we render our modal using react-bootstrap built-in components; it will be invisible until needed */}
                 <Modal show={this.state.showModal} onHide={this.close}>

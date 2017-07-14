@@ -72,7 +72,9 @@ class AuthModal extends Component {
                         // close the modal    
                         this.close();
                         this.props.updateGreeting(`${response.message}!`);
-                        this.props.updateUser()
+                        console.log("userInfo:",userInfo);
+                        this.props.updateUser(userInfo.username);
+                        // local storage method
                         this.storeUser(userInfo);
                     }
                 )
