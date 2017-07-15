@@ -17,7 +17,7 @@ class SearchedSong extends Component {
                             <span  onClick = { () => {this.props.SetFavorite(thisSong.song_id)} } className=
                             { favClasses }  data-song-id={thisSong.song_id}></span>  
                             
-                            <span class="getLyricsSpan" onClick= { () => this.props.GetLyrics (thisSong)}>{thisSong.title}</span> -  <Link to={`/search/${thisSong.artist}`}>{thisSong.artist}</Link>
+                            <span className="getLyricsSpan" onClick= { () => this.props.GetLyrics (thisSong)}>{thisSong.title}</span> -  <Link to={`/search/${thisSong.artist}`}>{thisSong.artist}</Link>
                         </h2>
 
                 </div>
