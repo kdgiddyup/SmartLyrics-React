@@ -11,14 +11,13 @@ class SearchedSong extends Component {
         const favClasses = `glyphicon glyphicon-heart favoriteButton ${this.props.favorite}`;
 
         return(
-            <div className="row">
-                <div className="col-lg-10 col-lg-offset-1 col-md-10 col-offset-1 col-sm-12 col-xs-12">
-                    <div className="panel">
-                        <h3>{thisSong.title} 
+            <div className="row song">
+                <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                         <h3>{thisSong.title} 
                             
-                            <span onClick= { ()=>this.props.GetLyrics (thisSong)}  className="glyphicon glyphicon-align-justify lyricsButton" data-song-id={thisSong.song_id} data-toggle="modal" data-target="#lyricsModal" aria-hidden="true" data-lyrics-url={thisSong.lyrics}></span> 
+                            <span onClick= { ()=>this.props.GetLyrics (thisSong)}  className="glyphicon glyphicon-align-justify lyricsButton" data-song-id={thisSong.song_id} data-toggle="modal" data-lyrics-url={thisSong.lyrics}></span> 
                             
-                            <span  onClick = { () => {this.props.SetFavorite(thisSong.song_id)} } className={ favClasses }  data-song-id={thisSong.song_id} aria-hidden="true"></span> 
+                            <span  onClick = { () => {this.props.SetFavorite(thisSong.song_id)} } className={ favClasses }  data-song-id={thisSong.song_id}></span> 
                         
                         </h3>
                         <h4 className="artist">
@@ -27,7 +26,6 @@ class SearchedSong extends Component {
                             </Link> 
                         </h4>
                     </div>
-                </div>
            </div> 
         )
     }

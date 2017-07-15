@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ajax from "../utils/ajax"
 import '../App.css'
-import LyricsModal from './common/modals/LyricsModal'
+import SongList from './common/SongList'
 import SearchLoading from "./common/SearchLoading"
 
 
@@ -83,7 +83,7 @@ class Search extends Component {
                         title:songInState.title,
                         artist:songInState.artist,
                         lyrics:songInState.lyrics,
-                        thumb:songInState.thumb,
+                        image:songInState.image,
                         user:this.props.user,
                         song_id:song_id,
                         favorite:"favorite"
@@ -102,13 +102,17 @@ class Search extends Component {
                             (response) => {
 
                                 // clone a new array to update state, but with this particular song inserted in place of its former self
-                                var updated = [...this.songs.state];
-                                for (var i=0;i<updated;i++) {
-                                    if (response.song.song_id === updated[i].song_id) {
+                                var updated = [...this.state.songs];
+                                var favedSongId = response.song.song_id 
+                                console.log("favorite array before:",updated);
+                                
+                                for (var i=0;i<updated.length;i++) {
+                                    if (Number(favedSongId) === Number(updated[i].song_id)) {
+                                        console.log(`${favedSongId} matches!`);
                                         updated[i].favorite="favorite"
                                     };
                                 };
-
+                                console.log("favorite array after:",updated);
                                 // set state to updated array of songs to trigger re-rendering
                                 this.setState({
                                     songs:updated,
@@ -127,9 +131,19 @@ class Search extends Component {
                         // success function
                         (response) => {
 
-                            // response should be a song id, which we filter from songs in state and setState with resulting array             
+                            // response should be a song id, which we filter from songs in state and setState with resulting array  
+                            var updated = [...this.state.songs];
+                            var delSongId = response; 
+                            console.log("favorite array before:",updated);
+                            
+                            for (var i=0;i<updated.length;i++) {
+                                if (Number(delSongId) === Number(updated[i].song_id)) {
+                                    updated[i].favorite=""
+                                };
+                            };
+                            console.log("unfaved after:",updated);
                             this.setState({
-                                songs: this.state.songs.filter( (song) => song.song_id !== response),
+                                songs: updated,
                                 showLoader: false
                             })
                         })
@@ -148,7 +162,7 @@ class Search extends Component {
     RenderResults = () => {
         // should search results be loaded?
         if (this.state.songs.length > 0) {
-            return <LyricsModal type="search" results={this.state.songs} SetFavorite={this.SetFavorite} />
+            return <SongList type="search" results={this.state.songs} SetFavorite={this.SetFavorite} />
         };
         return null
     }
@@ -164,7 +178,7 @@ class Search extends Component {
                         <button className="btn btn-primary btn-block" id="lyricsSearchButton" type="submit">Submit</button>
                     </form>
                 </div>
-                <div id="searchResults" className="row">
+                <div className="row">
                     <div className="col-lg-12" id="resultsList">
                         
                         {/* show search loader if we need it */}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ajax from "../utils/ajax"
 import "../App.css"
-import LyricsModal from './common/modals/LyricsModal'
+import SongList from './common/SongList'
 import FavoritesLoading from "./common/FavoritesLoading"
 import NoFavorites from "./common/NoFavorites"
 
@@ -39,6 +39,7 @@ class Favorites extends Component {
                 }
             else {
                 FavoriteComp = true;
+                console.log("favorites call response:",response)
                 this.setState({
                     songs: response.data
                     }) 
@@ -46,6 +47,12 @@ class Favorites extends Component {
 
         })
     }
+    
+    
+    
+    
+    // var updated = this.state.songs.filter( song  => song.song_id !== Number(response));
+    //   console.log("unfaved after:",updated);
 
     RemoveFavorite = (song_id) => {
         console.log("remove attempt song_id:",song_id);
@@ -57,7 +64,7 @@ class Favorites extends Component {
             // success function;
             (response) => {
                 // response should be a song id, which we filter from songs in state and setState with resulting array
-                var updated = this.state.songs.filter( (song) => song.song_id !== response)
+                var updated = this.state.songs.filter( (song) => Number(song.song_id) !== Number(response))
                 
                 // what if we just unfavorited our last song? the child component is determined by length of song list now in state
                 if (updated.length === 0) {
@@ -78,7 +85,7 @@ class Favorites extends Component {
             return <NoFavorites/>
         }
         else if (comp) {
-            return <LyricsModal type="favorite" results={this.state.songs} RemoveFavorite={this.RemoveFavorite}/>
+            return <SongList type="favorite" results={this.state.songs} RemoveFavorite={this.RemoveFavorite}/>
             }
         else {
             return <FavoritesLoading/>

@@ -177,11 +177,8 @@ class AuthModal extends Component {
                     <Modal.Header>
                         <Modal.Title>Let's get to know each other!</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
-                        {/* we render either our log-in or sign-in form here */}
+                       {/* we render either our log-in or sign-in form here */}
                         {this.putForm(this.state.formType)}
-                    
-                    </Modal.Body>
                     <Modal.Footer>
                         <ModalMessage message={this.state.message} />
                         <Button onClick={this.close}>Close</Button>

@@ -1,9 +1,33 @@
+#notesModal img {
+    width: 100%;
+    height: auto
+}
 .lyricThumb {
     width: 100%;
+    margin: 0 0 30px 0;
+}
+#lyricsHeader h2 {
+    font-size: 1.5em;
+}
+#lyricsWrapper {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    z-index: 1;
+    background-color: #ccc;
+    padding: 10px 10% 50px 10%;
+    width: 100%;
+    margin: 0 auto;
+    top: -110px;
+    box-shadow: 0px 10px 40px -15px #000;
 }
 #lyricsModalBody img {
     width: 100%;
     height: auto;
+     box-shadow: 0px 10px 40px -15px #000;
+}
+#lyricsCloser, #lyricsCloserBottom {
+    margin: 20px 0;
 }
 .referentText {
     background-color: #000;
@@ -22,6 +46,9 @@
 #header, #authBtns, #menuBtns {
     text-align: center;
 }
+#authBtns {
+    padding: 130px 0 0 0;
+}
 #menuBtns button {
     width: 90%;
     min-height: 100px;
@@ -33,6 +60,16 @@
 }
 .favorite {
     color: red;
+}
+#header {
+    position: fixed;
+    top: 0;
+    overflow: auto;
+    height: 100px;
+    z-index: 2;
+    background-color: #fff;
+    box-shadow: 0px 10px 40px -15px #000;
+    width: 100%;
 }
 #header a {
     text-decoration: none;
@@ -63,4 +100,7 @@
 .lyricsButton, .favoriteButton, .removeButton {
     cursor: pointer;
     margin: 0 5px 0 10px;
+}
+.modal-content {
+    padding: 0 10px;
 }

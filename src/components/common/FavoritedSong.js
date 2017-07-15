@@ -8,12 +8,11 @@ class FavoritedSong extends Component {
         const thisSong = this.props.songObj;
 
         return(
-            <div key={thisSong.song_id.toString()} className="row">
-                <div className="col-lg-10 col-lg-offset-1 col-md-10 col-offset-1 col-sm-12 col-xs-12">
-                    <div className="panel">
+            <div className="row song">
+                <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                         <h3>{thisSong.title} 
                         
-                            <span onClick= { () => this.props.GetLyrics (thisSong)} className="glyphicon glyphicon-align-justify lyricsButton" data-song-id={thisSong.song_id} data-toggle="modal" data-target="#lyricsModal" aria-hidden="true" data-lyrics-url={thisSong.url}></span> 
+                            <span onClick= { () => this.props.GetLyrics (thisSong)} className="glyphicon glyphicon-align-justify lyricsButton" data-song-id={thisSong.song_id} data-lyrics-url={thisSong.url}></span> 
                             
                             <span onClick = { () => this.props.RemoveFavorite(thisSong.song_id) } className="glyphicon glyphicon-trash removeButton" data-song-id={thisSong.song_id} aria-hidden="true"></span> 
                         
@@ -26,7 +25,6 @@ class FavoritedSong extends Component {
                         </h4>
 
                     </div>
-                </div>
            </div> 
         )
     }

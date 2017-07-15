@@ -92,7 +92,7 @@ const ajax = {
                 error(response)
             }
             else {
-                console.log("Lyrics fetch successful");
+                console.log("Lyrics fetch successful",response);
                 success(response)
             }
         })
