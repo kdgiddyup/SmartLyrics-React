@@ -23,5 +23,5 @@
     "deploy": "gh-pages -d build"
 
   },
-  "homepage": "https://kdgiddyup.github.io/SmartLyrics-React/"
+  "homepage": "https://smartlyrics-react.herokuapp.com/"
 }
