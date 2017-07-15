@@ -37,6 +37,9 @@ img.avatar {
 #lyricsCloser, #lyricsCloserBottom {
     margin: 20px 0;
 }
+.getLyricsSpan {
+    cursor: pointer
+}
 .referentText {
     background-color: #000;
     color: #fff;
