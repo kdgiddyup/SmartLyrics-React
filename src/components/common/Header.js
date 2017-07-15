@@ -11,6 +11,10 @@ class Header extends Component {
             <Link to={"/"}>
               <h1>SmartLyrics</h1>
             </Link>
+            <Link to={"http://genius.com"}>
+              <h4>Powered by Genius.com</h4>
+            </Link>
+
             {/*} Greeting comes from props */}
             <p id="userGreeting">{this.props.greeting}</p>
           </div>

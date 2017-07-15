@@ -12,7 +12,7 @@ class Signout extends Component {
   }
   render() {
     return (
-        <div onClick = { () => this.handleSignOut() } className="btn btn-primary" id="signoutBtn" value="Log out">Log out
+        <div onClick = { () => this.handleSignOut() } className="btn btn-success" id="signoutBtn" value="Log out">Log out
         </div> 
     )
   }

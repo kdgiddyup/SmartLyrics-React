@@ -7,10 +7,10 @@ class Login extends Component {
         <div>
           {/* onclick sends this button type to AuthModal's form() method */}
           
-          <div onClick = { () => this.props.form('login') } className="btn btn-primary" id="signinModalBtn" value="Log in">Log in
+          <div onClick = { () => this.props.form('login') } className="btn btn-success" id="signinModalBtn" value="Log in">Log in
           </div>
 
-          <div onClick = { () => this.props.form('signup') } className="btn btn-primary" id="signupModalBtn" value="Create account">Create account
+          <div onClick = { () => this.props.form('signup') } className="btn btn-success" id="signupModalBtn" value="Create account">Create account
           </div>
           
         </div>  

@@ -175,7 +175,7 @@ class Search extends Component {
                      <form onSubmit={this.processForm} id="signup">
                         <input className="input" id="lyricsSearch" name="lyricsSearch" placeholder="Enter lyrics, artists or song titles" type="text"/>
                      
-                        <button className="btn btn-primary btn-block" id="lyricsSearchButton" type="submit">Submit</button>
+                        <button className="btn btn-success btn-block" id="lyricsSearchButton" type="submit">Submit</button>
                     </form>
                 </div>
                 <div className="row">

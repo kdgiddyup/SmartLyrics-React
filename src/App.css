@@ -1,3 +1,24 @@
+body {
+    background-color: #74BEFF;
+}
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    height: 130px;
+    z-index: 2;
+    background-color: #E8870C;
+    box-shadow: 0px 10px 40px -15px #000;
+    width: 100%;
+    margin: 0;
+    color: #fff
+}
+#header a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
 #notesModal img {
     width: 100%;
     height: auto
@@ -23,7 +44,7 @@ img.avatar {
     z-index: 1;
     background-color: #ccc;
     padding: 10px 10% 50px 10%;
-    width: 100%;
+    width: 95%;
     margin: 0 auto;
     top: -110px;
     box-shadow: 0px 10px 40px -15px #000;
@@ -42,7 +63,7 @@ img.avatar {
 }
 .referentText {
     background-color: #000;
-    color: #fff;
+    color: #444;
     padding: 5px;
     border-radius: 5px;
 }
@@ -58,36 +79,38 @@ img.avatar {
     text-align: center;
 }
 #authBtns {
-    padding: 130px 0 0 0;
+    padding: 145px 0 0 0;
+}
+#favoritesList, #resultsList {
+    color: #fff
+}
+#favoritesList a, #resultsList a {
+    color: #444
+}
+#favoritesList .removeButton {
+color: #ccc;
+}
+#resultsList {
+    padding: 0 20px;
 }
 #menuBtns button {
     width: 90%;
     min-height: 100px;
     margin: 40px 0 0 0;
     font-size: 4em;
+    background-color: #FF0000; 
+    color: #fff;
 }
-#loginBtn,#signupBtn {
-    margin: 10px 0
+#signinModalBtn,#signupModalBtn {
+    margin: 10px 5px
+}
+#loginBtn, #signupBtn {
+    margin: 10px 0;
 }
 .favorite {
     color: red;
 }
-#header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow: auto;
-    height: 100px;
-    z-index: 2;
-    background-color: #fff;
-    box-shadow: 0px 10px 40px -15px #000;
-    width: 100%;
-    margin: 0;
-}
-#header a {
-    text-decoration: none;
-    color: #000;
-}
+
 #searchInput {
     width: 100%;
     margin: 30px auto;
@@ -103,9 +126,14 @@ img.avatar {
     border-radius: 5px;
     font-size: 1.2em;
 }
-#lyricsText a {
+
+#lyricsText, #lyricsText a {
     cursor: pointer;
     text-decoration: none;
+    color: #444;
+}
+#lyricsText a {
+    color: #E8870C
 }
 #lyricsSearchButton {
     margin: 10px 0;
@@ -116,7 +144,14 @@ img.avatar {
 }
 .modal-content {
     padding: 0 10px;
+    background-color: #E8870C;
+    color: #fff;
 }
 #notesModal {
-    padding: 20px
+    padding: 20px;
+    color: #fff;
+}
+.authorWrapper a {
+    color: #FF0000;
+    cursor: pointer;
 }
