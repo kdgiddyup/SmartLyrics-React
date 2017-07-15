@@ -9,20 +9,13 @@ class FavoritedSong extends Component {
 
         return(
             <div className="row song">
-                <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-                        <h3>{thisSong.title} 
-                        
-                            <span onClick= { () => this.props.GetLyrics (thisSong)} className="glyphicon glyphicon-align-justify lyricsButton" data-song-id={thisSong.song_id} data-lyrics-url={thisSong.url}></span> 
-                            
+                <div className="col-lg-10 col-lg-offset-1 col-xs-12"> 
+                        <h2>
                             <span onClick = { () => this.props.RemoveFavorite(thisSong.song_id) } className="glyphicon glyphicon-trash removeButton" data-song-id={thisSong.song_id} aria-hidden="true"></span> 
+                            
+                            <span class="getLyricsSpan" onClick= { () => this.props.GetLyrics (thisSong)}>{thisSong.title}</span> - <Link to={`/search/${thisSong.artist}`}>           {thisSong.artist}</Link> 
                         
-                        </h3>
-                        
-                        <h4 className="artist">
-                            <Link to={`/search/${thisSong.artist}`}>
-                                {thisSong.artist}
-                            </Link>    
-                        </h4>
+                        </h2>
 
                     </div>
            </div> 

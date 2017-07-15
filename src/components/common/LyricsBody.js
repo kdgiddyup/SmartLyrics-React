@@ -11,7 +11,8 @@ class LyricsBody extends Component {
     super();
     this.state = {
         noteData: "",
-        showModal: false
+        showModal: false,
+        authorInfo: ""
         }
         this.notesClose = this.notesClose.bind(this);
         this.HandleTextClick = this.HandleTextClick.bind(this);
@@ -63,10 +64,13 @@ class LyricsBody extends Component {
 
         //success callback
         (response) => {
-            console.log("NOTE CALL response:",response.annotation);
+            
+            var authors = [...response.annotation.authors];
+
             this.setState({
                 noteData: response.annotation.body.html,
-                showModal: true
+                showModal: true,
+                authorInfo: authors
             })
         })
     }; 
@@ -75,6 +79,21 @@ class LyricsBody extends Component {
     notesClose = () => {
         this.setState({ showModal: false })
     }
+    renderAuthorInfo = () => {
+        if (this.state.authorInfo.length > 0) {
+        var authors = this.state.authorInfo;
+         for (var i=0;i<authors.length;i++) {
+            return <div className="authorWrapper"> 
+            <div>
+                <a href={authors[i].user.url} target="_blank"><img alt="avatar" className="avatar" src={authors[i].user.avatar.small.url}/></a>
+                </div>
+                <div>
+                    <a href={authors[i].user.url} target="_blank">{authors[i].user.login}</a><br/>
+                    {authors[i].user.role_for_display}
+                </div>
+            </div>
+            };
+    }   }
 
     render() {
        return (
@@ -89,7 +108,7 @@ class LyricsBody extends Component {
                 {/* we render our lyrics results here */}
                 <div className="row">
                     <div className="col-lg-6 col-lg-offset-3 col-md-4 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12" id="lyricsModalBody">
-                        <button id="lyricsCloser" className="btn btn-primary btn-block" onClick={this.props.lyricsClose}>Hide</button>
+                        <button id="lyricsCloser" className="btn btn-success btn-block" onClick={this.props.lyricsClose}>Close</button>
                         
                         {/* song art, if any, goes here */}
                         {this.renderSongArt()}
@@ -97,16 +116,18 @@ class LyricsBody extends Component {
                         {/* html from scraping is handled with a special react prop to remind us this can be dangerous */}
                         <div onClick={this.HandleTextClick} id="lyricsText" dangerouslySetInnerHTML = {this.createMarkup(this.props.lyrics.lyrics)}/>
                         
-                        <button id="lyricsCloserBottom" className="btn btn-primary btn-block" onClick={this.props.lyricsClose}>Hide</button>
+                        <button id="lyricsCloserBottom" className="btn btn-success btn-block" onClick={this.props.lyricsClose}>Close</button>
                     </div>                
                 </div>
 
                 {/* notes modal window is here, but visible unless we want it to be*/}
-                 <Modal show={this.state.showModal} onHide={this.props.close}>
+                 <Modal id="notesModal" show={this.state.showModal} onHide={this.props.close}>
                     <Modal.Header>
                         <Modal.Title>
-                            <h4>Lyric notes</h4>
+                        Lyric notes
                         </Modal.Title>
+                        <p>Contributors:</p>
+                        {this.renderAuthorInfo()}
                     </Modal.Header>
                         <div id="notesModal" dangerouslySetInnerHTML={ {"__html": this.state.noteData} }/>
                     <Modal.Footer>

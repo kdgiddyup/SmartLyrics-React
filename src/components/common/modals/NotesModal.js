@@ -35,6 +35,7 @@ class NotesModal extends Component {
                     <Modal.Header>
                         <Modal.Title>
                             <h2>Lyric notes</h2>
+                            <div id="authorInfo">{this.authorInfo}</div>
                         </Modal.Title>
                     </Modal.Header>
                         <div id="notesModal" dangerouslySetInnerHTML={ note }/>
