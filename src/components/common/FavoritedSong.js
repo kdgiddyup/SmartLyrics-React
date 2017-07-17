@@ -13,7 +13,7 @@ class FavoritedSong extends Component {
                         <h2>
                             <span onClick = { () => this.props.RemoveFavorite(thisSong.song_id) } className="glyphicon glyphicon-trash removeButton" data-song-id={thisSong.song_id} aria-hidden="true"></span> 
                             
-                            <span class="getLyricsSpan" onClick= { () => this.props.GetLyrics (thisSong)}>{thisSong.title}</span> - <Link to={`/search/${thisSong.artist}`}>           {thisSong.artist}</Link> 
+                            <span className="getLyricsSpan" onClick= { () => this.props.GetLyrics (thisSong)}>{thisSong.title}</span> - <Link to={`/search/${thisSong.artist}`}>           {thisSong.artist}</Link> 
                         
                         </h2>
 

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import '../App.css'
 import Root from "./Root"
 import Header from "./common/Header"
+import Footer from "./common/Footer"
 import MenuBtns from "./common/MenuBtns"
 import AuthModal from "./common/modals/AuthModal"
 import Search from "./Search"
@@ -87,10 +88,11 @@ class App extends Component {
     return (
       <Router>
         <Root>
-          <Route exact path="/" component={Root}/>
+          <Route exact path="/demos/smartlyrics" component={Root}/>
           {/* render header and send the modal render method as a property */}
            <Header user={this.state.user} updateUser={this.updateUser} greeting={this.state.greeting} />
-            
+           <Footer/> 
+           
             {/* Modal will render but not be visible until triggered programmatically; we send as props our user, if any, and a method for updating user's name */}
             <AuthModal user={this.state.user} updateUser={this.updateUser} updateGreeting={this.updateGreeting}/>   
             
@@ -101,6 +103,8 @@ class App extends Component {
               <Route path="/search/:term" render={this.ParamSearch}/>
               <Route exact path="/search" render={this.Search}/>
               <Route path="/favorites" render={this.GetFavorites}/>
+
+            
                   
         </Root>
       </Router>
