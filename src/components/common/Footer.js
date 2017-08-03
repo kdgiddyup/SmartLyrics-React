@@ -8,7 +8,7 @@ class Footer extends Component {
     return (
       <div id="footer" className="row">
           <div className="col-lg-12">
-           <p>A Mongo-React-Express-Node demo project <Link to={"https://github.com/kdgiddyup"}>Kelly Davis</Link> <i className="fa fa-copyright" aria-hidden="true"></i> 2017</p>
+           <p>A Mongo-React-Express-Node demo project <a href="https://github.com/kdgiddyup" target="_blank">Kelly Davis</a> <i className="fa fa-copyright" aria-hidden="true"></i> 2017</p>
           </div>
       </div>
       );
