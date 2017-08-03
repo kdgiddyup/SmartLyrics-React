@@ -59,6 +59,7 @@ class SongList extends Component {
     renderSongs(type){
 
         if (type === "favorite") { 
+            console.log("favorites results",this.props.results);
         return this.props.results.map( song => ( 
                 <FavoritedSong key={song.song_id.toString()} 
                     songObj={{
