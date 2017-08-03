@@ -77,8 +77,13 @@ class App extends Component {
   }
 
   GetFavorites = () => {
+    // no user info? render root instead of favorites
+    let user = this.state.user;
+    if (!user) {
+      return ( <Root/> )
+    };
     return (
-      <Favorites user={this.state.user}/> 
+      <Favorites user={user}/> 
     )
   }
 
@@ -103,7 +108,7 @@ class App extends Component {
               <Route path="/search/:term" render={this.ParamSearch}/>
               <Route exact path="/search" render={this.Search}/>
               <Route path="/favorites" render={this.GetFavorites}/>
-
+              <Route path="/" component={Root}/>
             
                   
         </Root>

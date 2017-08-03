@@ -68,7 +68,7 @@ class SongList extends Component {
                         "artist":song.artist,
                         "image":song.image}}  
                     favorite={song.favorite}
-                    user={song.user}
+                    user={this.props.user}
                     RemoveFavorite={this.props.RemoveFavorite}
                     GetLyrics={this.GetLyrics}
                 />
@@ -85,6 +85,7 @@ class SongList extends Component {
                         "artist":song.artist,
                         "image":song.image}}            
                     favorite={song.favorite}
+                    user={this.props.user}
                     GetAnnotations={this.GetAnnotations}
                     SetFavorite={this.props.SetFavorite} 
                     GetLyrics={this.GetLyrics}

@@ -65,12 +65,11 @@ class LyricsBody extends Component {
         //success callback
         (response) => {
             
-            var authors = [...response.annotation.authors];
-
+            var topAuthor = response.annotation.authors[0];
             this.setState({
                 noteData: response.annotation.body.html,
                 showModal: true,
-                authorInfo: authors
+                authorInfo: topAuthor
             })
         })
     }; 
@@ -80,20 +79,18 @@ class LyricsBody extends Component {
         this.setState({ showModal: false })
     }
     renderAuthorInfo = () => {
-        if (this.state.authorInfo.length > 0) {
-        var authors = this.state.authorInfo;
-         for (var i=0;i<authors.length;i++) {
-            return <div className="authorWrapper"> 
-            <div>
-                <a href={authors[i].user.url} target="_blank"><img alt="avatar" className="avatar" src={authors[i].user.avatar.small.url}/></a>
-                </div>
-                <div>
-                    <a href={authors[i].user.url} target="_blank">{authors[i].user.login}</a><br/>
-                    {authors[i].user.role_for_display}
+        if (this.state.authorInfo !== "") {
+        var author = this.state.authorInfo;
+            return <div className="authorWrapper container"> 
+            <div className="row">
+                <h3>Top contributor: <a href={author.user.url} target="_blank">{author.user.login}</a> / {author.user.role_for_display}</h3>
+                <div className="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-6 col-xs-offset-1">
+                    <a href={author.user.url} target="_blank"><img alt="avatar" className="avatar" src={author.user.avatar.small.url}/></a>
                 </div>
             </div>
-            };
-    }   }
+        </div>;
+        }
+    }
 
     render() {
        return (
@@ -107,7 +104,7 @@ class LyricsBody extends Component {
                 </div>
                 {/* we render our lyrics results here */}
                 <div className="row">
-                    <div className="col-lg-6 col-lg-offset-3 col-md-4 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12" id="lyricsModalBody">
+                    <div className="col-lg-12" id="lyricsModalBody">
                         <button id="lyricsCloser" className="btn btn-success btn-block" onClick={this.props.lyricsClose}>Close</button>
                         
                         {/* song art, if any, goes here */}
@@ -126,7 +123,6 @@ class LyricsBody extends Component {
                         <Modal.Title>
                         Lyric notes
                         </Modal.Title>
-                        <p>Contributors:</p>
                         {this.renderAuthorInfo()}
                     </Modal.Header>
                         <div id="notesModal" dangerouslySetInnerHTML={ {"__html": this.state.noteData} }/>

@@ -66,7 +66,7 @@ class Search extends Component {
     }
 
     // method for toggling a favored song in search results
-    SetFavorite = (song_id) => {
+    SetFavorite = (user, song_id) => {
         const songs = this.state.songs; 
         var favPost = {};
         // loop through songs in state to find which matches this id
@@ -74,7 +74,7 @@ class Search extends Component {
             if (songs[i].song_id === song_id) {
                 const songInState = songs[i];
                
-                // is this a favoriting or an unfavoriting? test results in two courses of action 
+                // is this a favoriting or an unfavoriting? answer results in two courses of action 
                 if (songInState.favorite !== "favorite") {
 
                     // continue with favoriting. 
@@ -84,13 +84,12 @@ class Search extends Component {
                         artist:songInState.artist,
                         lyrics:songInState.lyrics,
                         image:songInState.image,
-                        user:this.props.user,
                         song_id:song_id,
                         favorite:"favorite"
                     }
                     
                     // make the call
-                    ajax.favorite( favPost,
+                    ajax.favorite( this.props.user, favPost,
                         //error function
                         (response) => {
 
@@ -123,11 +122,13 @@ class Search extends Component {
                 else {  
 
                     // song is already favorited, so we're really unfavoriting
-                    ajax.remove( song_id,
+                    ajax.remove( this.props.user, song_id,
+                        
                         // error function
                         (response) => {
                             console.log(response.error)
                         },
+                        
                         // success function
                         (response) => {
 

@@ -1,5 +1,6 @@
 import $ from "jquery";
 
+//const resource = "http://localhost:3002";
 const resource = "https://smartlyricsapi.herokuapp.com";
 
 const ajax = {
@@ -34,7 +35,7 @@ const ajax = {
                 error("Sorry, there was a problem, or no results.")
             }
             else {
-                console.log("Search successful");
+                console.log("local search successful:",response);
                 success(response);
             }
         })
@@ -55,10 +56,11 @@ const ajax = {
 
     // hit our api to post a favorite
     // song is an object of song data
-    favorite: ( song, error, success ) => {
+    favorite: ( user, song, error, success ) => {
 
         // request should include title , artist, song_id, image url, lyrics page url
-        $.post(`${resource}/api/favorites`,song,(response) => {
+        console.log("api source:",resource);
+        $.post(`${resource}/api/favorite/${user}`, song, (response) => {
             if (!response.success) {
                 error(response.message)
             }
@@ -71,10 +73,10 @@ const ajax = {
 
     // hit our api to remove a favorite
     // here, we only need song_id
-    remove: ( song_id, error, success ) => { 
-        
+    remove: ( user, song_id, error, success ) => { 
+        console.log(user, song_id);
         // get request sends song_id to remove route at api
-        $.get(`${resource}/api/remove/${song_id}`, (response) => {
+        $.get(`${resource}/api/remove/${user}/${song_id}`, (response) => {
           
             if (!response.success) {
                 error(response.message)

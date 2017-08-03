@@ -13,14 +13,15 @@ class Favorites extends Component {
     this.state = {
         songs: [] 
         };
-
     this.RemoveFavorite = this.RemoveFavorite.bind(this); 
     }
-
+    
+    
     componentDidMount(){   
+        const user=this.props.user;
         
        // search for favorites requires current user
-        ajax.favorites(this.props.user,
+        ajax.favorites(user,
 
         // error function:
         (response) => {
@@ -30,33 +31,27 @@ class Favorites extends Component {
 
         //success function:
         (response) => {
+            response = response.data.favorites;
             console.log("favorites call response",response);
-            if (response.data.length === 0) {
+            if (response === undefined || response.length === 0) {
                 FavoriteComp = false; 
                 this.setState({
-                    songs: response.data
+                    songs: response
                     })
                 }
             else {
                 FavoriteComp = true;
                 console.log("favorites call response:",response)
                 this.setState({
-                    songs: response.data
+                    songs: response
                     }) 
                 }
 
         })
     }
-    
-    
-    
-    
-    // var updated = this.state.songs.filter( song  => song.song_id !== Number(response));
-    //   console.log("unfaved after:",updated);
 
-    RemoveFavorite = (song_id) => {
-        console.log("remove attempt song_id:",song_id);
-        ajax.remove(song_id,
+    RemoveFavorite = (user,song_id) => {
+        ajax.remove(user,song_id,
             // error function
             (response) => {
                 console.log(response.error)
@@ -85,7 +80,7 @@ class Favorites extends Component {
             return <NoFavorites/>
         }
         else if (comp) {
-            return <SongList type="favorite" results={this.state.songs} RemoveFavorite={this.RemoveFavorite}/>
+            return <SongList type="favorite" user={this.props.user} results={this.state.songs} RemoveFavorite={this.RemoveFavorite}/>
             }
         else {
             return <FavoritesLoading/>
