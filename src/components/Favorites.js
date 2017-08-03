@@ -41,7 +41,7 @@ class Favorites extends Component {
                 }
             else {
                 FavoriteComp = true;
-                console.log("favorites call response:",response)
+                console.log("there are favorites");
                 this.setState({
                     songs: response
                     }) 
