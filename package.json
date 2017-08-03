@@ -22,5 +22,5 @@
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build"
     },
-    "homepage": "https://smartlyrics.herokuapp.com/"
+    "homepage": "https://smartlyrics.herokuapp.com"
 }
